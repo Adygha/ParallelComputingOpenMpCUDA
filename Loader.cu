@@ -17,7 +17,7 @@
 #endif // _WIN32
 
 const unsigned COUNT_THREADS[] = {1U, 6U, 12U, 24U, 48U}; // The thread count used in every phase of OpenMP calculation.
-const unsigned COUNT_ITERATIONS[] = {24000000U, 48000000U, 960000000U, 1920000000U, 3840000000U}; // The number of PI calculation iterations used by OpenMp and CUDA
+const unsigned COUNT_ITERATIONS[] = {240000000U, 480000000U, 960000000U, 1920000000U, 3840000000U}; // The number of PI calculation iterations used by OpenMp and CUDA
 #define DISPLAY_NON_MEAN_RESULTS true // A flag to specify whether to display every iteration's results (before calculating mean/average)
 #define INCLUDE_CUDA_MALLOC_TIME true // A flag to specify whether to 'cudaMalloc' time in CUDA PI calculation time
 #define MEAN_REPEAT 12 // Number of repeates to calculate the mean/average

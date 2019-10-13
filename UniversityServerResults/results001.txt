@@ -1,180 +1,180 @@
-Result of OpenMP PI calculate using '1' threads and '24000000' iterations:
-	PI result:                                                [3.14159265359001960149499] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000022648549702]
-	Calculation trimmed mean/average time:                    [0.0746622913]
-	Calculation trimmed mean/average time standard deviation: [0.0000540364]
+Result of OpenMP PI calculate using '1' threads and '240000000' iterations:
+	PI result:                                                [3.14159265359030381858929] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000051070259133]
+	Calculation trimmed mean/average time:                    [0.7461023465]
+	Calculation trimmed mean/average time standard deviation: [0.0003779513]
 
-Result of OpenMP PI calculate using '1' threads and '48000000' iterations:
-	PI result:                                                [3.14159265358936323764283] [3.14159265359]
-	PI result difference from assignment PI constant:         [-0.00000000000042987835513]
-	Calculation trimmed mean/average time:                    [0.1493115917]
-	Calculation trimmed mean/average time standard deviation: [0.0001955770]
+Result of OpenMP PI calculate using '1' threads and '480000000' iterations:
+	PI result:                                                [3.14159265358955641644911] [3.14159265359]
+	PI result difference from assignment PI constant:         [-0.00000000000023669954885]
+	Calculation trimmed mean/average time:                    [1.4919886373]
+	Calculation trimmed mean/average time standard deviation: [0.0004500031]
 
 Result of OpenMP PI calculate using '1' threads and '960000000' iterations:
 	PI result:                                                [3.14159265358949069124606] [3.14159265359]
 	PI result difference from assignment PI constant:         [-0.00000000000030242475191]
-	Calculation trimmed mean/average time:                    [2.9836108159]
-	Calculation trimmed mean/average time standard deviation: [0.0005546770]
+	Calculation trimmed mean/average time:                    [2.9831094950]
+	Calculation trimmed mean/average time standard deviation: [0.0000642225]
 
 Result of OpenMP PI calculate using '1' threads and '1920000000' iterations:
 	PI result:                                                [3.14159265359008399443042] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000029087843245]
-	Calculation trimmed mean/average time:                    [5.9660172623]
-	Calculation trimmed mean/average time standard deviation: [0.0001346048]
+	Calculation trimmed mean/average time:                    [5.9658790592]
+	Calculation trimmed mean/average time standard deviation: [0.0000791869]
 
 Result of OpenMP PI calculate using '1' threads and '3840000000' iterations:
 	PI result:                                                [3.14159265358965855696738] [3.14159265359]
 	PI result difference from assignment PI constant:         [-0.00000000000013455903058]
-	Calculation trimmed mean/average time:                    [11.9316114917]
-	Calculation trimmed mean/average time standard deviation: [0.0000789645]
+	Calculation trimmed mean/average time:                    [11.9314375579]
+	Calculation trimmed mean/average time standard deviation: [0.0000600924]
 
-Result of OpenMP PI calculate using '6' threads and '24000000' iterations:
-	PI result:                                                [3.14159265358986328209312] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000007016609516]
-	Calculation trimmed mean/average time:                    [0.0160788368]
-	Calculation trimmed mean/average time standard deviation: [0.0032657886]
+Result of OpenMP PI calculate using '6' threads and '240000000' iterations:
+	PI result:                                                [3.14159265358979267190875] [3.14159265359]
+	PI result difference from assignment PI constant:         [-0.00000000000000044408921]
+	Calculation trimmed mean/average time:                    [0.1432216626]
+	Calculation trimmed mean/average time standard deviation: [0.0138435384]
 
-Result of OpenMP PI calculate using '6' threads and '48000000' iterations:
-	PI result:                                                [3.14159265358976425019932] [3.14159265359]
-	PI result difference from assignment PI constant:         [-0.00000000000002886579864]
-	Calculation trimmed mean/average time:                    [0.0268486988]
-	Calculation trimmed mean/average time standard deviation: [0.0000194762]
+Result of OpenMP PI calculate using '6' threads and '480000000' iterations:
+	PI result:                                                [3.14159265358949157942448] [3.14159265359]
+	PI result difference from assignment PI constant:         [-0.00000000000030153657349]
+	Calculation trimmed mean/average time:                    [0.2674454991]
+	Calculation trimmed mean/average time standard deviation: [0.0000435655]
 
 Result of OpenMP PI calculate using '6' threads and '960000000' iterations:
 	PI result:                                                [3.14159265358988859517808] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000009547918012]
-	Calculation trimmed mean/average time:                    [0.5350441489]
-	Calculation trimmed mean/average time standard deviation: [0.0000731706]
+	Calculation trimmed mean/average time:                    [0.5348689146]
+	Calculation trimmed mean/average time standard deviation: [0.0000443914]
 
 Result of OpenMP PI calculate using '6' threads and '1920000000' iterations:
-	PI result:                                                [3.14159265358987083160969] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000007771561172]
-	Calculation trimmed mean/average time:                    [1.0697490215]
-	Calculation trimmed mean/average time standard deviation: [0.0001641503]
+	PI result:                                                [3.14159265358987038752048] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000007727152251]
+	Calculation trimmed mean/average time:                    [1.0699850231]
+	Calculation trimmed mean/average time standard deviation: [0.0003693703]
 
 Result of OpenMP PI calculate using '6' threads and '3840000000' iterations:
 	PI result:                                                [3.14159265358979089555191] [3.14159265359]
 	PI result difference from assignment PI constant:         [-0.00000000000000222044605]
-	Calculation trimmed mean/average time:                    [2.1390945543]
-	Calculation trimmed mean/average time standard deviation: [0.0001319218]
+	Calculation trimmed mean/average time:                    [2.1394592423]
+	Calculation trimmed mean/average time standard deviation: [0.0000819738]
 
-Result of OpenMP PI calculate using '12' threads and '24000000' iterations:
-	PI result:                                                [3.14159265358978601057061] [3.14159265359]
-	PI result difference from assignment PI constant:         [-0.00000000000000710542736]
-	Calculation trimmed mean/average time:                    [0.0099954005]
-	Calculation trimmed mean/average time standard deviation: [0.0016568410]
+Result of OpenMP PI calculate using '12' threads and '240000000' iterations:
+	PI result:                                                [3.14159265358982597859949] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000003286260153]
+	Calculation trimmed mean/average time:                    [0.1088537630]
+	Calculation trimmed mean/average time standard deviation: [0.0007485742]
 
-Result of OpenMP PI calculate using '12' threads and '48000000' iterations:
-	PI result:                                                [3.14159265358979578053322] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000000266453526]
-	Calculation trimmed mean/average time:                    [0.0144515615]
-	Calculation trimmed mean/average time standard deviation: [0.0000051852]
+Result of OpenMP PI calculate using '12' threads and '480000000' iterations:
+	PI result:                                                [3.14159265358965766878896] [3.14159265359]
+	PI result difference from assignment PI constant:         [-0.00000000000013544720900]
+	Calculation trimmed mean/average time:                    [0.1794401485]
+	Calculation trimmed mean/average time standard deviation: [0.0009313334]
 
 Result of OpenMP PI calculate using '12' threads and '960000000' iterations:
 	PI result:                                                [3.14159265358979533644401] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000000222044605]
-	Calculation trimmed mean/average time:                    [0.2888011068]
-	Calculation trimmed mean/average time standard deviation: [0.0000024891]
+	Calculation trimmed mean/average time:                    [0.3242417499]
+	Calculation trimmed mean/average time standard deviation: [0.0020710136]
 
 Result of OpenMP PI calculate using '12' threads and '1920000000' iterations:
-	PI result:                                                [3.14159265358976380611011] [3.14159265359]
-	PI result difference from assignment PI constant:         [-0.00000000000002930988785]
-	Calculation trimmed mean/average time:                    [0.5776068367]
-	Calculation trimmed mean/average time standard deviation: [0.0000267187]
+	PI result:                                                [3.14159265358976425019932] [3.14159265359]
+	PI result difference from assignment PI constant:         [-0.00000000000002886579864]
+	Calculation trimmed mean/average time:                    [0.6131149735]
+	Calculation trimmed mean/average time standard deviation: [0.0012355082]
 
 Result of OpenMP PI calculate using '12' threads and '3840000000' iterations:
-	PI result:                                                [3.14159265358981043547715] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000001731947918]
-	Calculation trimmed mean/average time:                    [1.1552120339]
-	Calculation trimmed mean/average time standard deviation: [0.0000213513]
+	PI result:                                                [3.14159265358981087956636] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000001776356839]
+	Calculation trimmed mean/average time:                    [1.1887395393]
+	Calculation trimmed mean/average time standard deviation: [0.0020305568]
 
-Result of OpenMP PI calculate using '24' threads and '24000000' iterations:
-	PI result:                                                [3.14159265358975980930722] [3.14159265359]
-	PI result difference from assignment PI constant:         [-0.00000000000003330669074]
-	Calculation trimmed mean/average time:                    [0.0071805194]
-	Calculation trimmed mean/average time standard deviation: [0.0000175764]
+Result of OpenMP PI calculate using '24' threads and '240000000' iterations:
+	PI result:                                                [3.14159265358981443228004] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000002131628207]
+	Calculation trimmed mean/average time:                    [0.0704414170]
+	Calculation trimmed mean/average time standard deviation: [0.0000475255]
 
-Result of OpenMP PI calculate using '24' threads and '48000000' iterations:
-	PI result:                                                [3.14159265358979400417638] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000000088817842]
-	Calculation trimmed mean/average time:                    [0.0137111936]
-	Calculation trimmed mean/average time standard deviation: [0.0000676910]
+Result of OpenMP PI calculate using '24' threads and '480000000' iterations:
+	PI result:                                                [3.14159265358981709681530] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000002398081733]
+	Calculation trimmed mean/average time:                    [0.1376787558]
+	Calculation trimmed mean/average time standard deviation: [0.0013615097]
 
 Result of OpenMP PI calculate using '24' threads and '960000000' iterations:
-	PI result:                                                [3.14159265358983974536500] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000004662936703]
-	Calculation trimmed mean/average time:                    [0.2706261810]
-	Calculation trimmed mean/average time standard deviation: [0.0002459740]
+	PI result:                                                [3.14159265358983930127579] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000004618527782]
+	Calculation trimmed mean/average time:                    [0.2707775246]
+	Calculation trimmed mean/average time standard deviation: [0.0002757006]
 
 Result of OpenMP PI calculate using '24' threads and '1920000000' iterations:
 	PI result:                                                [3.14159265358979578053322] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000000266453526]
-	Calculation trimmed mean/average time:                    [0.5353145402]
-	Calculation trimmed mean/average time standard deviation: [0.0001855143]
+	Calculation trimmed mean/average time:                    [0.5353389610]
+	Calculation trimmed mean/average time standard deviation: [0.0002191513]
 
 Result of OpenMP PI calculate using '24' threads and '3840000000' iterations:
 	PI result:                                                [3.14159265358981887317213] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000002575717417]
-	Calculation trimmed mean/average time:                    [1.0644810740]
-	Calculation trimmed mean/average time standard deviation: [0.0002140480]
+	Calculation trimmed mean/average time:                    [1.0642314129]
+	Calculation trimmed mean/average time standard deviation: [0.0002502343]
 
-Result of OpenMP PI calculate using '48' threads and '24000000' iterations:
-	PI result:                                                [3.14159265358979578053322] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000000266453526]
-	Calculation trimmed mean/average time:                    [0.0075455993]
-	Calculation trimmed mean/average time standard deviation: [0.0018691746]
+Result of OpenMP PI calculate using '48' threads and '240000000' iterations:
+	PI result:                                                [3.14159265358979089555191] [3.14159265359]
+	PI result difference from assignment PI constant:         [-0.00000000000000222044605]
+	Calculation trimmed mean/average time:                    [0.0469534501]
+	Calculation trimmed mean/average time standard deviation: [0.0055343355]
 
-Result of OpenMP PI calculate using '48' threads and '48000000' iterations:
-	PI result:                                                [3.14159265358980022142532] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000000710542736]
-	Calculation trimmed mean/average time:                    [0.0090950340]
-	Calculation trimmed mean/average time standard deviation: [0.0000108301]
+Result of OpenMP PI calculate using '48' threads and '480000000' iterations:
+	PI result:                                                [3.14159265358980821503110] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000001509903313]
+	Calculation trimmed mean/average time:                    [0.0879272670]
+	Calculation trimmed mean/average time standard deviation: [0.0000478942]
 
 Result of OpenMP PI calculate using '48' threads and '960000000' iterations:
-	PI result:                                                [3.14159265358979622462243] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000000310862447]
-	Calculation trimmed mean/average time:                    [0.1801020041]
-	Calculation trimmed mean/average time standard deviation: [0.0019630032]
+	PI result:                                                [3.14159265358979666871164] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000000355271368]
+	Calculation trimmed mean/average time:                    [0.1748610977]
+	Calculation trimmed mean/average time standard deviation: [0.0020027678]
 
 Result of OpenMP PI calculate using '48' threads and '1920000000' iterations:
 	PI result:                                                [3.14159265358978556648140] [3.14159265359]
 	PI result difference from assignment PI constant:         [-0.00000000000000754951657]
-	Calculation trimmed mean/average time:                    [0.3230437219]
-	Calculation trimmed mean/average time standard deviation: [0.0007844212]
+	Calculation trimmed mean/average time:                    [0.3560639095]
+	Calculation trimmed mean/average time standard deviation: [0.0044130526]
 
 Result of OpenMP PI calculate using '48' threads and '3840000000' iterations:
 	PI result:                                                [3.14159265358980643867426] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000001332267630]
-	Calculation trimmed mean/average time:                    [0.6574462865]
-	Calculation trimmed mean/average time standard deviation: [0.0152750055]
+	Calculation trimmed mean/average time:                    [0.6810700264]
+	Calculation trimmed mean/average time standard deviation: [0.0056065160]
 
-Result of CUDA PI calculate using '24000000' iterations:
+Result of CUDA PI calculate using '240000000' iterations:
+	PI result:                                                [3.14159265358979311599796] [3.14159265359]
+	PI result difference from assignment PI constant:         [0.00000000000000000000000]
+	Calculation trimmed mean/average time:                    [0.0342122436]
+	Calculation trimmed mean/average time standard deviation: [0.0056065160]
+
+Result of CUDA PI calculate using '480000000' iterations:
 	PI result:                                                [3.14159265358979356008717] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000000044408921]
-	Calculation trimmed mean/average time:                    [0.0041294113]
-	Calculation trimmed mean/average time standard deviation: [0.0152750055]
-
-Result of CUDA PI calculate using '48000000' iterations:
-	PI result:                                                [3.14159265358979356008717] [3.14159265359]
-	PI result difference from assignment PI constant:         [0.00000000000000044408921]
-	Calculation trimmed mean/average time:                    [0.0075128019]
-	Calculation trimmed mean/average time standard deviation: [0.0152750055]
+	Calculation trimmed mean/average time:                    [0.0641318668]
+	Calculation trimmed mean/average time standard deviation: [0.0056065160]
 
 Result of CUDA PI calculate using '960000000' iterations:
 	PI result:                                                [3.14159265358979311599796] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000000000000000]
-	Calculation trimmed mean/average time:                    [0.1280555785]
-	Calculation trimmed mean/average time standard deviation: [0.0152750055]
+	Calculation trimmed mean/average time:                    [0.1281298123]
+	Calculation trimmed mean/average time standard deviation: [0.0056065160]
 
 Result of CUDA PI calculate using '1920000000' iterations:
 	PI result:                                                [3.14159265358979311599796] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000000000000000]
-	Calculation trimmed mean/average time:                    [0.2560118414]
-	Calculation trimmed mean/average time standard deviation: [0.0152750055]
+	Calculation trimmed mean/average time:                    [0.2560963940]
+	Calculation trimmed mean/average time standard deviation: [0.0056065160]
 
 Result of CUDA PI calculate using '3840000000' iterations:
 	PI result:                                                [3.14159265358979311599796] [3.14159265359]
 	PI result difference from assignment PI constant:         [0.00000000000000000000000]
-	Calculation trimmed mean/average time:                    [0.5119663995]
-	Calculation trimmed mean/average time standard deviation: [0.0152750055]
+	Calculation trimmed mean/average time:                    [0.5122594159]
+	Calculation trimmed mean/average time standard deviation: [0.0056065160]
 
