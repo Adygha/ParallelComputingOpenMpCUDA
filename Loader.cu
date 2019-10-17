@@ -7,9 +7,7 @@
 #include <device_launch_parameters.h>
 #include <stdio.h>
 #include <omp.h>
-#include <stdlib.h>
 #include <float.h>
-#include <math.h>
 #ifdef _WIN32
 #include <intrin.h>
 #else
@@ -20,14 +18,13 @@ const unsigned COUNT_THREADS[] = {1U, 6U, 12U, 24U, 48U}; // The thread count us
 const unsigned COUNT_ITERATIONS[] = {240000000U, 480000000U, 960000000U, 1920000000U, 3840000000U}; // The number of PI calculation iterations used by OpenMp and CUDA
 #define DISPLAY_NON_MEAN_RESULTS true // A flag to specify whether to display every iteration's results (before calculating mean/average)
 #define INCLUDE_CUDA_MALLOC_TIME true // A flag to specify whether to 'cudaMalloc' time in CUDA PI calculation time
-#define MEAN_REPEAT 12 // Number of repeates to calculate the mean/average
-#define MEAN_TRIM 1 // The number of trimmed repeates (highest and lowestwith total 2*MEAN_TRIM trim) from the repeates to calculate the mean/average
+#define MEAN_REPEAT 120 // Number of repeates to calculate the mean/average
+#define MEAN_TRIM 10 // The number of trimmed repeates (highest and lowestwith total 2*MEAN_TRIM trim) from the repeates to calculate the mean/average
 #define PRINTF_PI_PRECISION 11 // Low precision for displaying PI results
 #define PRINTF_PI_PRECISION_FULL 23 // High precision for displaying PI results
 #define PRINTF_TIME_PRECISION 10 // Precision for displaying wall-time
 #define FILE_RESULTS "results.txt" // A file to put the results in
 
-//#define ldouble_t long double // Just to use more capable 'long double' on Ida's gcc
 #define getElemName(var) #var // Just to get the element (like variable) name
 #define ASSIGNMENT_PI 3.14159265358979323846264
 
@@ -56,11 +53,10 @@ int main() {
 
 	printf("\nThis machine's double-epsilon is: [%.*lf]. It should be considered by observers if it matters.\n\n", PRINTF_PI_PRECISION_FULL, DBL_EPSILON);
 	printCpuGpuInfo();
-	//printf("wtick[%.23lf]\n", omp_get_wtick());
 
-	for (unsigned th = 0; th < tmpThreadCalcs; th++) { // OpenMP phase
-		for (unsigned itr = 0; itr < tmpIterCalcs; itr++) {
-			printf("OpenMP PI calculate using '%u' threads and '%u' iterations repeated '%u' time:\n", COUNT_THREADS[th], COUNT_ITERATIONS[itr], MEAN_REPEAT);
+	for (unsigned th = 0U; th < tmpThreadCalcs; th++) { // OpenMP phase
+		for (unsigned itr = 0U; itr < tmpIterCalcs; itr++) {
+			printf("OpenMP PI calculate using '%u' threads and '%u' iterations repeated '%u' times:\n", COUNT_THREADS[th], COUNT_ITERATIONS[itr], MEAN_REPEAT);
 			for (unsigned rep = 0; rep < MEAN_REPEAT; rep++) {
 				tmpOpenMpTimes[th][itr][rep] = runOnHostOpenMpCalcPiTask1(COUNT_THREADS[th], COUNT_ITERATIONS[itr], &tmpOpenMpResults[th][itr][rep], DISPLAY_NON_MEAN_RESULTS);
 			}
@@ -85,8 +81,8 @@ int main() {
 		}
 	}
 
-	for (unsigned itr = 0; itr < tmpIterCalcs; itr++) { // CUDA phase
-		printf("CUDA PI calculate using '%u' iterations (including 'cudaMalloc' time) repeated '%u' time:\n", COUNT_ITERATIONS[itr], MEAN_REPEAT);
+	for (unsigned itr = 0U; itr < tmpIterCalcs; itr++) { // CUDA phase
+		printf("CUDA PI calculate using '%u' iterations (including 'cudaMalloc' time) repeated '%u' times:\n", COUNT_ITERATIONS[itr], MEAN_REPEAT);
 		for (unsigned rep = 0; rep < MEAN_REPEAT; rep++) {
 			tmpCudaTimes[itr][rep] = runOnCudaDeviceKernelCalcPiTask2(COUNT_ITERATIONS[itr], &tmpCudaResults[itr][rep], INCLUDE_CUDA_MALLOC_TIME, DISPLAY_NON_MEAN_RESULTS);
 		}
@@ -412,12 +408,13 @@ double runOnHostOpenMpCalcPiTask1(unsigned inThreadCount, unsigned inIterationCo
 	// - Reducing 'outPI'.
 	// - Sharing 'tmpItersReciprocal' and 'inIterationCount' (same value used by all and reading with no writing)
 	// - Private 'tmpNthIter' for every thread to avoid race hazards and helps avoiding using any atomic variable/operation
-	// - Number of thread as the function parameter specifies
+	// - Number of threads as the function parameter specifies
 	// - Schedule to static can be used to avoid auto/default decision of schedule
 	// - Ordered can be used (although slower on slow machines) to avoid floating-point associative calculation
 	//   differences: https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problems
-#pragma omp parallel for default(none) reduction(+:outPI) shared(tmpItersReciprocal, inIterationCount) private(tmpNthIter) num_threads(inThreadCount) //schedule(static) ordered
-	for (unsigned i = 0; i < inIterationCount; i++) {
+#pragma omp parallel for default(none) reduction(+:outPI) shared(tmpItersReciprocal, inIterationCount) private(tmpNthIter) \
+																		num_threads(inThreadCount) //schedule(static) ordered
+	for (unsigned i = 0U; i < inIterationCount; i++) {
 		tmpNthIter = ((double)i + 0.5) * tmpItersReciprocal;
 		outPI += 4.0 / (1.0 + tmpNthIter * tmpNthIter);
 	}
@@ -425,8 +422,10 @@ double runOnHostOpenMpCalcPiTask1(unsigned inThreadCount, unsigned inIterationCo
 
 	tmpTime = omp_get_wtime() - tmpTime;
 
-	if (isDisplayResult) printf("Calculate PI using OpenMp with '%2d' threads: [%.*lf] [%.*lf]. with time: [%.*lf]\n",
-								inThreadCount, PRINTF_PI_PRECISION_FULL, outPI, PRINTF_PI_PRECISION, outPI, PRINTF_TIME_PRECISION, tmpTime);
+	if (isDisplayResult) {
+		printf("Calculate PI using OpenMp with '%2d' threads: [%.*lf] [%.*lf]. with time: [%.*lf]\n",
+			   inThreadCount, PRINTF_PI_PRECISION_FULL, outPI, PRINTF_PI_PRECISION, outPI, PRINTF_TIME_PRECISION, tmpTime);
+	}
 	*outResultPI = outPI;
 	return tmpTime;
 }
