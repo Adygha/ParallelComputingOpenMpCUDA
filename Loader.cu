@@ -33,6 +33,7 @@ double runOnHostOpenMpCalcPiTask1(unsigned inThreadCount, unsigned inIterationCo
 double runOnCudaDeviceKernelCalcPiTask2(const unsigned inIterationCount, double *outResultPI, bool isWithMallocTime, bool isDisplayResults); // Calculates PI using CUDA (returns wall-time)
 double trimmedMean(double *inValuesArray, unsigned arraySize, unsigned trimCount); // Calculates trimmed/truncated mean of a double-array
 double standardDeviation(double *inSortedValuesArray, unsigned arraySize, unsigned trimCount, double theMean);
+bool giveChoice(const char *choiceMessage, unsigned *choiceKey); // Gives the user a choice to cancel a CUDA/OpenMP phase (or quit app).
 void printCpuGpuInfo(); // Displays CPU and GPU detailed names for now
 
 /**
@@ -40,12 +41,14 @@ void printCpuGpuInfo(); // Displays CPU and GPU detailed names for now
  * @author Janty Azmat
  */
 int main() {
-	const unsigned tmpThreadCalcs = sizeof(COUNT_THREADS) / sizeof(unsigned int);
-	const unsigned tmpIterCalcs = sizeof(COUNT_ITERATIONS) / sizeof(unsigned int);
-	double tmpOpenMpResults[tmpThreadCalcs][tmpIterCalcs][MEAN_REPEAT];
-	double tmpCudaResults[tmpIterCalcs][MEAN_REPEAT];
-	double tmpOpenMpTimes[tmpThreadCalcs][tmpIterCalcs][MEAN_REPEAT];
-	double tmpCudaTimes[tmpIterCalcs][MEAN_REPEAT];
+	const unsigned tmpThreadCalcsConst = sizeof(COUNT_THREADS) / sizeof(unsigned int);
+	unsigned tmpThreadCalcs = tmpThreadCalcsConst;
+	const unsigned tmpIterCalcsConst = sizeof(COUNT_ITERATIONS) / sizeof(unsigned int);
+	unsigned tmpIterCalcs = tmpIterCalcsConst;
+	double tmpOpenMpResults[tmpThreadCalcsConst][tmpIterCalcsConst][MEAN_REPEAT];
+	double tmpCudaResults[tmpIterCalcsConst][MEAN_REPEAT];
+	double tmpOpenMpTimes[tmpThreadCalcsConst][tmpIterCalcsConst][MEAN_REPEAT];
+	double tmpCudaTimes[tmpIterCalcsConst][MEAN_REPEAT];
 	double tmpPI = 0.0; // PI interim mean result
 	double tmpTime = 0.0; // Timer interim mean result
 	double tmpStdDevi = 0.0; // Timer interim mean standard deviation
@@ -54,6 +57,7 @@ int main() {
 	printf("\nThis machine's double-epsilon is: [%.*lf]. It should be considered by observers if it matters.\n\n", PRINTF_PI_PRECISION_FULL, DBL_EPSILON);
 	printCpuGpuInfo();
 
+	if (giveChoice("Starting OpenMP phase", &tmpThreadCalcs)) return 0; // Choice to skip OpenMP (or quit)
 	for (unsigned th = 0U; th < tmpThreadCalcs; th++) { // OpenMP phase
 		for (unsigned itr = 0U; itr < tmpIterCalcs; itr++) {
 			printf("OpenMP PI calculate using '%u' threads and '%u' iterations repeated '%u' times:\n", COUNT_THREADS[th], COUNT_ITERATIONS[itr], MEAN_REPEAT);
@@ -81,6 +85,8 @@ int main() {
 		}
 	}
 
+	if (giveChoice("Starting CUDA phase", &tmpIterCalcs)) return 0; // Choice to skip CUDA (or quit)
+	cudaDeviceSynchronize(); // Needed after pausing main host thread waiting for input
 	for (unsigned itr = 0U; itr < tmpIterCalcs; itr++) { // CUDA phase
 		printf("CUDA PI calculate using '%u' iterations (including 'cudaMalloc' time) repeated '%u' times:\n", COUNT_ITERATIONS[itr], MEAN_REPEAT);
 		for (unsigned rep = 0; rep < MEAN_REPEAT; rep++) {
@@ -93,7 +99,7 @@ int main() {
 		printf("Last round trimmed mean/average PI result difference from assignment PI constant: [%.*lf]\n", PRINTF_PI_PRECISION_FULL, tmpPI - ASSIGNMENT_PI);
 		printf("Last round trimmed mean/average time:%45s[%.*lf]\n", " ", PRINTF_TIME_PRECISION, (tmpTime = trimmedMean(&tmpCudaTimes[itr][0], MEAN_REPEAT, MEAN_TRIM)));
 		printf("Last round trimmed mean/average time standard deviation:%26s[%.*lf]\n\n\n",
-				" ", PRINTF_TIME_PRECISION, standardDeviation(&tmpCudaTimes[itr][0], MEAN_REPEAT, MEAN_TRIM, tmpTime));
+				" ", PRINTF_TIME_PRECISION, (tmpStdDevi = standardDeviation(&tmpCudaTimes[itr][0], MEAN_REPEAT, MEAN_TRIM, tmpTime)));
 		fprintf(tmpFile, "Result of CUDA PI calculate using '%u' iterations:\n"
 				"\tPI result:%48s[%.*lf] [%.*lf]\n"
 				"\tPI result difference from assignment PI constant:%9s[%.*lf]\n"
@@ -144,6 +150,44 @@ void printCpuGpuInfo() { // Based on: https://stackoverflow.com/questions/850774
 }
 
 /**
+ * Used to give a choice to cancel a CUDA/OpenMP phase.
+ * @author Janty Azmat
+ * @param choiceMessage		the message to display about the choice.
+ * @param choiceKey			the choice key that can be set to 'zero' to cancel the phase.
+ * @return					'true' to quit the app immedialtly, or else 'false'.
+ */
+bool giveChoice(const char *choiceMessage, unsigned *choiceKey) {
+	//char tmpChoice = 0, tmpDummy;
+	char tmpChoice[50];
+	*tmpChoice = 0;
+	while (!*tmpChoice) {
+		printf("%s. Enter ['y'/'Y'] to proceed, 'n'/'N' to cancel, or 'q'/'Q' to quit: ", choiceMessage);
+		fgets(tmpChoice, 49, stdin);
+		switch (*tmpChoice) {
+			case 'y':
+			case 'Y':
+			case 10: // 'Enter' pressed (empty string)
+			case 13: // Just in case
+				printf("\n");
+				return false; // 'false' for don't quit
+			case 'n':
+			case 'N':
+				*choiceKey = 0U; // Zero the key
+				printf("\n");
+				return false; // 'false' for don't exit
+			case 'q':
+			case 'Q':
+				printf("\nQuitting...\n\n");
+				return true; // 'true' for quit
+			default:
+				*tmpChoice = 0;
+				printf("Invalid input. Please try again.\n");
+		}
+	}
+	return false; // Useless, but to avoid warning
+}
+
+/**
  * Used as a double comparator callbeck with 'qsort'.
  * @author Janty Azmat
  * @param leftVal	left value to compare.
@@ -169,12 +213,13 @@ int doubleComparator(const void *leftVal, const void *rightVal) {
  */
 double trimmedMean(double *inValuesArray, unsigned arraySize, unsigned trimCount) {
 	double outMean = 0.0;
+	double tmpN = (double)(arraySize - 2U * trimCount);
 	if (arraySize > 2U * trimCount) {
 		qsort(inValuesArray, arraySize, sizeof(double), doubleComparator); // Sort first
 		for (unsigned i = trimCount; i < arraySize - trimCount; i++) { // Loop and sum excluding the trimmed part
 			outMean += inValuesArray[i];
 		}
-		outMean /= (double)(arraySize - 2U * trimCount);
+		outMean /= tmpN;
 	}
 	return outMean;
 }
@@ -190,11 +235,12 @@ double trimmedMean(double *inValuesArray, unsigned arraySize, unsigned trimCount
  */
 double standardDeviation(double *inSortedValuesArray, unsigned arraySize, unsigned trimCount, double theMean) {
 	double outDevi = 0.0;
-	if (arraySize > 2U * trimCount && theMean > 0.0) {
+	double tmpN = (double)(arraySize - 2U * trimCount);
+	if (arraySize > 2U * trimCount + 1U && theMean > 0.0) {
 		for (unsigned i = trimCount; i < arraySize - trimCount; i++) { // Loop to calculate first art while excluding the trimmed part
 			outDevi += pow(inSortedValuesArray[i] - theMean, 2.0);
 		}
-		outDevi = sqrt(outDevi / (double)(arraySize - 1U));
+		outDevi = sqrt(outDevi / (tmpN - 1.0));
 	}
 	return outDevi;
 }
